@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A rule-based demonstration tool that gives teachers suggested feedback on a sample student answer.">
+  <title>Assignment Feedback Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header no-print">
+    <h1>Assignment Feedback Assistant</h1>
+    <p>Get a structured, rubric-based feedback draft to support your own marking.</p>
+    <p class="banner demo"><strong>Rule-based demonstration:</strong> this tool counts rubric keywords in the answer. It does not use AI and cannot judge whether an answer is correct, well argued or original. All marks are <strong>suggestions that need teacher review</strong>.</p>
+    <p class="banner privacy"><strong>Privacy:</strong> do not enter student names, ID numbers, emails, phone numbers, school or class details, or other identifying information. Use anonymous or made-up sample text. Everything is processed in your browser, and nothing is uploaded or saved.</p>
+  </header>
+
+  <main>
+    <section class="card no-print" aria-labelledby="form-title">
+      <div class="title-row">
+        <h2 id="form-title">Assignment details</h2>
+        <button type="button" id="example-btn" class="btn link">Load example</button>
+      </div>
+
+      <form id="feedback-form" novalidate>
+        <div class="field">
+          <label for="question">Assignment question</label>
+          <textarea id="question" rows="2" maxlength="500"></textarea>
+          <p class="error" id="question-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="rubric">Grading rubric</label>
+          <textarea id="rubric" rows="5" maxlength="2000"></textarea>
+          <p class="hint">One criterion per line (up to 8): <code>Criterion name | points | keyword, keyword, keyword</code><br>
+            Points are optional (if left out, marks are shared equally). If you give points, give them for every line and make them add up to the maximum score. If you leave out keywords, words from the criterion name are used.</p>
+          <p class="error" id="rubric-error" hidden></p>
+        </div>
+
+        <div class="field narrow">
+          <label for="maxscore">Maximum score</label>
+          <input id="maxscore" type="number" min="1" max="1000" step="0.5" inputmode="decimal">
+          <p class="error" id="maxscore-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="answer">Sample student answer (anonymous)</label>
+          <textarea id="answer" rows="7" maxlength="5000"></textarea>
+          <p class="error" id="answer-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label class="check"><input type="checkbox" id="confirm"> <span>I confirm the text above contains no identifiable student information.</span></label>
+          <p class="error" id="confirm-error" hidden></p>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">Generate Feedback</button>
+          <button type="button" id="print-btn" class="btn secondary" disabled>Print Feedback</button>
+          <button type="button" id="reset-btn" class="btn secondary">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="report" class="card report" tabindex="-1" aria-live="polite" hidden></section>
+  </main>
+
+  <footer class="site-footer no-print">
+    <p>Rule-based demo &middot; MIT License &middot; Not a substitute for professional judgement.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
